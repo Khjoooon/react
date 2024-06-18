@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aloha.react.Product.mapper.ProductMapper">
+
+    <resultMap id="ProductResultMap" type="com.aloha.react.Product.dto.Product">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="price" column="price" />
+        <result property="img" column="img" />
+        <result property="createdAt" column="created_at" />
+        <result property="updatedAt" column="updated_at" />
+    </resultMap>
+
+    <insert id="insertProduct" parameterType="com.aloha.react.Product.dto.Product">
+        INSERT INTO product (id, name, price, img, created_at, updated_at)
+        VALUES (#{id}, #{name}, #{price}, #{img}, #{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="selectProductById" parameterType="String" resultMap="ProductResultMap">
+        SELECT id, name, price, img, created_at, updated_at
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAllProducts" resultMap="ProductResultMap">
+        SELECT id, name, price, img, created_at, updated_at
+        FROM product
+    </select>
+
+    <update id="updateProduct" parameterType="com.aloha.react.Product.dto.Product">
+        UPDATE product
+        SET name = #{name}, price = #{price}, img = #{img}, updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="String">
+        DELETE FROM product
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
